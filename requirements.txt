@@ -1,0 +1,5 @@
+jupyterlab
+schemdraw
+numpy
+matplotlib
+ipywidgets
