@@ -18,23 +18,23 @@ venv_path = os.path.join(script_path, '.venv')
 def create_venv():
     if os.path.exists(venv_path):
         logger.warning("Virtual env {p} already exists. Not recreated.".format(p=venv_path))
-    else:
-        logger.info("Creating virtual env {p}...".format(p=venv_path))
-        create(venv_path, with_pip=True)
+        return
+    logger.info("Creating virtual env {p}...".format(p=venv_path))
+    create(venv_path, with_pip=True)
 
 def install_pkgs():
     venv_bin_dir = 'bin'
     if os.name == 'nt':
-        # Windows has executables in "Scripts" directory rather than "bin"
+        # Windows has venv executables in "Scripts" directory rather than "bin"
         venv_bin_dir = 'Scripts'
     pip_path = os.path.join(venv_path, venv_bin_dir, 'pip')
     req_path = os.path.join(script_path, 'requirements.txt')
     if run([pip_path, "-q", "--require-virtualenv", "show", "jupyterlab"], cwd=script_path).returncode == 0:
         logger.warning("Jupyter Lab already installed. Pip requirements install not run.")
-    else:
-        logger.info("Installing requirements.txt...")
-        run([pip_path, "install", "-r", req_path], cwd=script_path)
-        run([pip_path, "list"], cwd=script_path)
+        return
+    logger.info("Installing requirements.txt...")
+    run([pip_path, "install", "-r", req_path], cwd=script_path)
+    run([pip_path, "list"], cwd=script_path)
 
 def main():
     logging.basicConfig(level=logging.INFO)
