@@ -5,8 +5,14 @@ Collection of Jupyter Notebooks.
 ## Usage
 
 To setup python virtual env and install Jupyter Lab and other required packages, run:
+
+### Windows
 ```powershell
-python .\venv_setup.py
+py .\venv_setup.py
+```
+### Linux
+```bash
+./venv_setup.py
 ```
 
 ## Electronics
