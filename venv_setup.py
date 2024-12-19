@@ -11,7 +11,6 @@ import os
 from subprocess import run
 import logging
 logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO)
 
 script_path = os.path.dirname(os.path.realpath(__file__))
 venv_path = os.path.join(script_path, '.venv')
@@ -38,6 +37,7 @@ def install_pkgs():
         run([pip_path, "list"], cwd=script_path)
 
 def main():
+    logging.basicConfig(level=logging.INFO)
     create_venv()
     install_pkgs()
     logger.info('Done')
